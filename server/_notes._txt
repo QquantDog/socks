@@ -1,0 +1,5 @@
+generating secret token for further actions:
+    node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+generating models from my DB:
+    npx sequelize-auto -h localhost -d userbase -u kekich  -p 5432  --dialect postgres  -o models -l esm -C 
