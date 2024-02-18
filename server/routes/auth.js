@@ -1,11 +1,11 @@
 // import pool from "../pg_connect.js";
 import { Router } from "express";
 import { AuthValidator } from "../validators/auth.js";
-import { AuthController } from "../controllers/AuthController.js";
+import { AuthController } from "../controllers/auth_controller.js";
 
 const authRouter = new Router();
 
-// ALSO ADD ROLE 
+// ALSO ADD ROLE
 authRouter.post("/sign-in", AuthValidator.signIn, AuthController.signIn);
 // сделать адекватную проверку регистрации
 authRouter.post("/sign-up", AuthValidator.signUp, AuthController.signUp);

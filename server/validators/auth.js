@@ -9,7 +9,7 @@ async function validateRequest(req, res, next, schema) {
         return next();
     } catch (err) {
         console.log(err);
-        res.status(403).json(err);
+        res.status(403).json({err: err.message});
     }
 }
 
@@ -21,7 +21,7 @@ export const signUpSchema = yup.object({
         nickname: yup.string().required("Name is required").min(3, "Minimal chars: 3").max(50, "Maximal chars: 50"),
         password: yup.string().required("Name is required").min(3, "Minimal chars: 3").max(50, "Maximal chars: 50"),
         email: yup.string().required().email(),
-        role: yup.string().required().oneOf(roles, "Invalid role"),
+        role: yup.string().oneOf(roles, "Invalid role"),
     }),
 });
 

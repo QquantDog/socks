@@ -1,7 +1,23 @@
 // РЕАЛИЗОВАТЬ ОШИБКИ
-class Error400 extends Error{
+export class Error400 extends Error{
     constructor(){
         super();
+    }
+}
+
+export class RefreshTokenExpired extends Error400 {
+    constructor() {
+        super();
+        this.message = "Error: limit of accounts logged in / reached limit of tokens";
+        this.status = 410;
+    }
+}
+
+export class TokenLimitExceeded extends Error400 {
+    constructor() {
+        super();
+        this.message = "Error: limit of accounts logged in / reached limit of tokens";
+        this.status = 404;
     }
 }
 
@@ -9,7 +25,7 @@ export class UserNotFound extends Error400 {
     constructor() {
         super();
         this.message = "Error: user not found";
-        this.status = 404;
+        this.status = 422;
     }
 }
 
@@ -39,8 +55,8 @@ export class UserAlreadyExists extends Error400 {
 export class InvalidPassword extends Error400 {
     constructor() {
         super();
-        this.message = "Error: user already exists";
-        this.status = 422;
+        this.message = "Error: invalid password";
+        this.status = 401;
     }
 }
 

@@ -30,10 +30,10 @@ app.use(
 );
 app.use("/", authRouter);
 app.use(ErrorUtils.catchAndSendError)
+app.use(function (_, res) {
+    res.status(404).json({err: "Non-existing path"})
+});
 
 app.listen(port, () => {
     console.log(`Server on port ${port}`);
 });
-
-// app.use("/:val", add2);
-// app.use("/:val", mult5);

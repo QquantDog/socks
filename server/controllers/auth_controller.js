@@ -1,6 +1,6 @@
 // import Fingerprint from "express-fingerprint";
 import { COOKIE_SETTINGS } from "../options/cookie_settings.js";
-import { AuthService } from "../services/AuthService.js";
+import { AuthService } from "../services/auth_service.js";
 
 class AuthController {
     static async signIn(req, res, next) {
@@ -14,15 +14,10 @@ class AuthController {
             });
             res.cookie("refreshToken", refreshToken, COOKIE_SETTINGS.REFRESH_TOKEN_OPTIONS);
             //
-            // await sequelize.transaction
-            // { transaction: t });
-            //
             // на фронте поменять на accesstokenexpiration
             //
-            console.log("BEFORE SUCCESS SIGN IN");
             return res.status(200).json({ accessToken, accessTokenExpiration });
         } catch (err) {
-            console.log("CATCH WORKED");
             next(err);
             // ErrorUtils.catchAndSendError(res, err, "Error while signing-up");
         }
@@ -34,7 +29,6 @@ class AuthController {
         let role;
         req.body.role != undefined ? (role = req.body.role) : (role = "user");
         const { fingerprint } = req;
-
         try {
             const { accessToken, refreshToken, accessTokenExpiration } = await AuthService.signUp({
                 nickname,
@@ -58,7 +52,6 @@ class AuthController {
         const refreshToken = req.cookies.refreshToken;
         try {
             await AuthService.logout(refreshToken);
-
             res.clearCookie("refreshToken");
             return res.sendStatus(200);
         } catch (err) {
