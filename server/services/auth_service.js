@@ -18,7 +18,7 @@ import { IsolationLevel } from "@sequelize/core";
 export class AuthService {
     // rigth now ONLY USER are created - not admins
     // проблема с табами - не будет кросс шеринга - пока так - потом подумаю
-    static async signIn({ email, password, fingerprint }) {
+    static async signIn({ email, password, fingerprint }) { 
         const UserFindByEmailResult = await users.findOne({
             where: {
                 email: email,

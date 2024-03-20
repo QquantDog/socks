@@ -20,3 +20,4 @@ authRouter.post("/logout", AuthValidator.logout, AuthController.logout);
 // });
 
 export { authRouter };
+
